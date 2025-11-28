@@ -73,6 +73,32 @@ This will:
   python main.py --no-trufflehog
   ```
 
+## Continuous Monitoring
+
+For effective security monitoring, it's recommended to run Repo Guardian regularly. You can set it up as:
+
+### Cron Job (Linux/macOS)
+
+Add a cron job to run the script at regular intervals:
+
+```bash
+# Edit crontab
+crontab -e
+
+# Add a line to run every 6 hours (adjust path as needed)
+0 */6 * * * cd /path/to/repo-guardian && python main.py >> /path/to/repo-guardian/cron.log 2>&1
+```
+
+### Task Scheduler (Windows)
+
+1. Open Task Scheduler
+2. Create a new Basic Task
+3. Set the trigger (e.g., Daily)
+4. Set the action to start a program:
+   - Program/script: `python`
+   - Arguments: `main.py`
+   - Start in: `C:\path\to\repo-guardian`
+
 ## How It Works
 
 1. **Organization Member Discovery**: Fetches all members from the configured GitHub organizations
@@ -98,4 +124,3 @@ The application uses a standard Python logger with rotation support. Logs are st
 - Service name
 - Message
 - Event type
-
